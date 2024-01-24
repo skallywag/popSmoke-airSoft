@@ -1,6 +1,6 @@
 import React from "react";
 import HomePage from "./pages/homePage/HomePage";
-import TestPage from "./pages/testPage/TestPage";
+import CreateGame from "./pages/createGame/CreateGame";
 import {createBrowserRouter} from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
     },
     {
-        path: "/test",
-        element: <TestPage />,
+        path: "/game/create",
+        element: <CreateGame />,
     },
 ]);
