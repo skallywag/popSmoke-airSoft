@@ -22,4 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*dataBase.js
 .env
+db.config.js
+schema.prisma
+server/modals/dataBase.js
