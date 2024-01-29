@@ -11,11 +11,9 @@ app.use(express.json())
 import * as gameController from './controllers/game.js'
 
 
-app.get('/mess', (req, res) => {
-    console.log('hit')
-    res.send({message: 'sent'});
-})
-app.get('/', gameController.getAllGames)
+//game end points
+app.get('/game/games', gameController.getAllGames)
+app.post('game/create', gameController.createGame)
 
 const port = process.env.PORT
 app.listen(port, () => console.log(`Warped to port ${port}`))
