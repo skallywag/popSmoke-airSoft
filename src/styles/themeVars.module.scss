@@ -1,9 +1,11 @@
 $primaryRed: #740d30;
 $primaryBlue: #131b30;
 $white: #ffffff;
+$accentError: #FF0000;
 
 :export {
   primaryRed: $primaryRed;
   primaryBlue: $primaryBlue;
   white: $white;
+  accentError: $accentError;
 }

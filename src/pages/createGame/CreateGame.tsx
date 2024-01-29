@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './CreateGame.scss';
-import { useForm, SubmitHandler } from "react-hook-form";
+import theme from '../../styles/themeVars.module.scss';
+import {createGame} from "../../api/game";
+import {useForm, SubmitHandler} from "react-hook-form";
 import {
     FormErrorMessage,
     FormLabel,
@@ -17,8 +19,13 @@ const CreateGame: React.FC = () => {
         formState: { errors},
     } = useForm()
 
-    function onSubmit(values) {
-        console.log(values)
+    async function onSubmit(values) {
+        try {
+            const response = await createGame(values)
+            console.log(response)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     return (
@@ -31,10 +38,10 @@ const CreateGame: React.FC = () => {
                         placeholder='Title'
                         {...register('title', {
                             required: 'Title is required',
-                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                            minLength: {value: 4, message: 'Minimum length should be 4'},
                         })}
                     />
-                    <span>{errors.title && errors.title.message}</span>
+                    <span style={{color: theme.accentError}}>{errors.title && errors.title.message}</span>
                 </FormControl>
 
                 <FormControl>
@@ -44,10 +51,10 @@ const CreateGame: React.FC = () => {
                         placeholder='Description'
                         {...register('description', {
                             required: 'Description is required',
-                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                            minLength: {value: 4, message: 'Minimum length should be 4'},
                         })}
                     />
-                    <span>{errors.description && errors.description.message}</span>
+                    <span style={{color: theme.accentError}}>{errors.description && errors.description.message}</span>
                 </FormControl>
 
                 <FormControl>
@@ -57,13 +64,13 @@ const CreateGame: React.FC = () => {
                         placeholder='Location'
                         {...register('location', {
                             required: 'Location is required',
-                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                            minLength: {value: 4, message: 'Minimum length should be 4'},
                         })}
                     />
-                    <span>{errors.location && errors.location.message}</span>
+                    <span style={{color: theme.accentError}}>{errors.location && errors.location.message}</span>
                 </FormControl>
 
-                <Button width={'100%'} mt={4} colorScheme='teal'  type='submit'>
+                <Button width={'100%'} mt={4} colorScheme='teal' type='submit'>
                     Submit
                 </Button>
             </form>

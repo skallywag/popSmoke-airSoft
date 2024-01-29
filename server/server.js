@@ -13,7 +13,7 @@ import * as gameController from './controllers/game.js'
 
 //game end points
 app.get('/game/games', gameController.getAllGames)
-app.post('game/create', gameController.createGame)
+app.post('/game/create', gameController.createGame)
 
 const port = process.env.PORT
 app.listen(port, () => console.log(`Warped to port ${port}`))
