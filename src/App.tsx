@@ -2,15 +2,16 @@ import './App.scss'
 import {
     RouterProvider,
 } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {router} from "./router";
-import {CSSReset} from "@chakra-ui/react";
 
 function App() {
 
   return (
     <div className="App">
-        <CSSReset/>
         <RouterProvider router={router} />
+        <ToastContainer/>
     </div>
   )
 }

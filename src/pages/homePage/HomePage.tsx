@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './HomePage.scss';
-import {Box} from "@chakra-ui/react";
+import {Box} from "@mantine/core";
 interface HomePageProps {
 }
 const HomePage: React.FC<HomePageProps> = (props) => {
