@@ -5,28 +5,47 @@ import {createGame} from "../../api/game";
 import {isNotEmpty, useForm} from '@mantine/form';
 import '@mantine/dates/styles.css';
 import {DateTimePicker} from '@mantine/dates';
-import {Box, Button, Textarea, TextInput, Select} from "@mantine/core";
+import {Box, Button, Textarea, TextInput, Select, Checkbox, NumberInput, MultiSelect, Divider, Title} from "@mantine/core";
 
 type FieldValues = {
     title: string;
     description: string;
     gameType: string;
     state: string;
+    address: string;
+    locationName: string;
     dateTime: string;
+    paidEvent?: boolean;
+    entryPrice?: number;
+    acceptedPayment?: any;
 }
 
 const CreateGame: React.FC = () => {
     const form = useForm<FieldValues>({
-        initialValues: {title: '', description: '', gameType: '', state: '', dateTime: ''},
+        initialValues: {
+            title: '',
+            description: '',
+            gameType: '',
+            state: '',
+            dateTime: '',
+            paidEvent: false,
+            entryPrice: undefined,
+            acceptedPayment: [],
+            locationName: '',
+            address: ''
+        },
         validate: {
             title: (value) => (value.length < 4 && 'Title must have at least 2 letters'),
             description: (value) => (value.length < 4 && 'Enter game description'),
             gameType: (value) => (!value && 'Select a game type'),
             state: (value) => (!value && 'Select a State'),
-            dateTime: (value) => (!value && "Choose a date and time")
+            locationName: (value) => (!value && 'Enter name of location'),
+            address: (value) => (!value && 'Enter address of location'),
+            dateTime: (value) => (!value && "Choose a date and time"),
+            entryPrice: (value) => (!value && form.values.paidEvent && 'Enter entry price'),
+            acceptedPayment: (value) => value.length === 0 && form.values.paidEvent && 'Select Payment type'
         },
     });
-
 
     const onSubmit = (values) => {
         try {
@@ -37,27 +56,56 @@ const CreateGame: React.FC = () => {
         }
     }
 
+    const handleResetEventValues = () => {
+        if (form.values.paidEvent) {
+            form.setFieldValue('entryPrice', undefined);
+            form.setFieldValue('acceptedPayment', [])
+        }
+    }
+
     return (
         <Box className={'page CreateGame'}>
             <Box mb={40} ta={"center"}>Create a Game or Event</Box>
+
             <Box style={{boxShadow: '0 0 10px rgba(0,0,0,.18', padding: '36px 24px'}}>
+                <Title mb={20} size={18}>Operation</Title>
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
                     <TextInput mb={20} label="Title" placeholder="Title" {...form.getInputProps('title')}/>
                     <Textarea mb={20} label="Description"
                               placeholder="Description" {...form.getInputProps('description')}/>
                     <Select mb={20} label="Game Type" placeholder="Select Game Type"
                             data={["Open play", "Event"]} {...form.getInputProps('gameType')}/>
+
+                    {form.values.gameType === "Event" &&
+                        <Checkbox mb={20} onClick={() => handleResetEventValues()}
+                                  label={"Paid Event?"} {...form.getInputProps('paidEvent')}/>}
+
+                    {form.values.paidEvent &&
+                        <>
+                            <NumberInput mb={20} placeholder="Entry Price" {...form.getInputProps('entryPrice')}/>
+                            <MultiSelect mb={20} placeholder="Select accepted payments"
+                                         data={["venmo", "paypal", "Cash"]} {...form.getInputProps('acceptedPayment')}/>
+                        </>
+                    }
                     <Select mb={20} label="State" placeholder="Select State"
                             data={["Arizona", "Utah"]} {...form.getInputProps('state')}/>
+                    <TextInput mb={20} label="Location Name"
+                               placeholder="Hobble Creek" {...form.getInputProps('locationName')}/>
+                    <TextInput mb={20} label="Address"
+                               placeholder="ie: 2248 Deer Crk Wy, Springville, UT 84663" {...form.getInputProps('address')}/>
                     <DateTimePicker
                         mb={20}
+                        clearable
                         label="Pick date and time"
                         placeholder="Pick date and time"
                         valueFormat="DD MMM YYYY hh:mm A"
                         {...form.getInputProps('dateTime')}
-                    /> <Button fullWidth mt={4} type='submit'>
-                    Submit
-                </Button>
+                    />
+                    <Divider mb={20}/>
+                    <Title mb={20} size={18}>Contact</Title>
+                    <Button fullWidth mt={4} type='submit'>
+                        Submit
+                    </Button>
                 </form>
             </Box>
         </Box>
