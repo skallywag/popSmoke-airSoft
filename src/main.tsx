@@ -7,7 +7,10 @@ import App from "./App";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <MantineProvider>
+        <MantineProvider       theme={{
+            fontFamily: 'Verdana, sans-serif',
+            fontFamilyMonospace: 'Monaco, Courier, monospace',
+        }}>
             <App/>
         </MantineProvider>
     </React.StrictMode>,

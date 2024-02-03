@@ -18,6 +18,7 @@ type FieldValues = {
     paidEvent?: boolean;
     entryPrice?: number;
     acceptedPayment?: any;
+    firstName: string;
 }
 
 const CreateGame: React.FC = () => {
@@ -32,10 +33,13 @@ const CreateGame: React.FC = () => {
             entryPrice: undefined,
             acceptedPayment: [],
             locationName: '',
-            address: ''
+            address: '',
+            firstName: '',
+            email: '',
+            phoneNumber: ''
         },
         validate: {
-            title: (value) => (value.length < 4 && 'Title must have at least 2 letters'),
+            title: (value) => (value.length < 4 && 'Title must have at least 4 letters'),
             description: (value) => (value.length < 4 && 'Enter game description'),
             gameType: (value) => (!value && 'Select a game type'),
             state: (value) => (!value && 'Select a State'),
@@ -43,7 +47,9 @@ const CreateGame: React.FC = () => {
             address: (value) => (!value && 'Enter address of location'),
             dateTime: (value) => (!value && "Choose a date and time"),
             entryPrice: (value) => (!value && form.values.paidEvent && 'Enter entry price'),
-            acceptedPayment: (value) => value.length === 0 && form.values.paidEvent && 'Select Payment type'
+            acceptedPayment: (value) => value.length === 0 && form.values.paidEvent && 'Select Payment type',
+            firstName: (value) => (!value && "Enter your name"),
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
         },
     });
 
@@ -82,8 +88,8 @@ const CreateGame: React.FC = () => {
 
                     {form.values.paidEvent &&
                         <>
-                            <NumberInput mb={20} placeholder="Entry Price" {...form.getInputProps('entryPrice')}/>
-                            <MultiSelect mb={20} placeholder="Select accepted payments"
+                            <NumberInput ml={16} mb={20} placeholder="Entry Price" prefix="$" {...form.getInputProps('entryPrice')}/>
+                            <MultiSelect ml={16} mb={20} placeholder="Select accepted payments"
                                          data={["venmo", "paypal", "Cash"]} {...form.getInputProps('acceptedPayment')}/>
                         </>
                     }
@@ -94,7 +100,7 @@ const CreateGame: React.FC = () => {
                     <TextInput mb={20} label="Address"
                                placeholder="ie: 2248 Deer Crk Wy, Springville, UT 84663" {...form.getInputProps('address')}/>
                     <DateTimePicker
-                        mb={20}
+                        mb={30}
                         clearable
                         label="Pick date and time"
                         placeholder="Pick date and time"
@@ -103,6 +109,11 @@ const CreateGame: React.FC = () => {
                     />
                     <Divider mb={20}/>
                     <Title mb={20} size={18}>Contact</Title>
+                    <TextInput mb={20} label="First Name" placeholder="First name" {...form.getInputProps('firstName')}/>
+
+                    <TextInput mb={20} label="Contact Email" placeholder="Contact Email" {...form.getInputProps('email')}/>
+
+                    <TextInput mb={20} label="Phone (Optional)" placeholder="Phone Number" type={"number"}{...form.getInputProps('phoneNumber')}/>
                     <Button fullWidth mt={4} type='submit'>
                         Submit
                     </Button>
