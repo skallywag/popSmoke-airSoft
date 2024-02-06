@@ -20,7 +20,7 @@
     "@mantine/modals": "^7.5.1",
     "@mantine/nprogress": "^7.5.1",
     "@mantine/spotlight": "^7.5.1",
-    "@prisma/client": "^5.8.1",
+    "@prisma/client": "^5.9.1",
     "@types/cors": "^2.8.17",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",

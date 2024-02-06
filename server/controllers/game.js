@@ -12,20 +12,45 @@ export const getAllGames = async (req, res) => {
 }
 
 export const createGame = async (req, res) => {
-    const {title, description, location} = req.body.data
+    const {
+        title,
+        description,
+        locationName,
+        gameType,
+        state,
+        dateTime,
+        paidEvent,
+        entryPrice,
+        address,
+        firstName,
+        acceptedPayment,
+        email,
+        phoneNumber
+    } = req.body.data
+
     try {
         const response = await prisma.game.create({
             data: {
-                userId: 1,
+                userId: 8,
                 title: title,
                 description: description,
-                location: location
+                locationName: locationName,
+                gameType: gameType,
+                state: state,
+                dateTime: dateTime,
+                paidEvent: paidEvent,
+                entryPrice: entryPrice,
+                acceptedPayment: acceptedPayment,
+                address: address,
+                firstName: firstName,
+                email: email,
+                phoneNumber: phoneNumber
             }
         })
         return res.status(200).send(response)
     } catch (error) {
         console.error('Error Creating game:', error)
-        return res.status(500).json({message: 'Error Creating game'})
+        return res.status(500).send({message: 'Error Creating game'})
     }
 }
 

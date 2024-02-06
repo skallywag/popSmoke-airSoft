@@ -2,10 +2,21 @@ import * as React from 'react';
 import './CreateGame.scss';
 import {toast} from "react-toastify";
 import {createGame} from "../../api/game";
-import {isNotEmpty, useForm} from '@mantine/form';
+import {useForm} from '@mantine/form';
 import '@mantine/dates/styles.css';
 import {DateTimePicker} from '@mantine/dates';
-import {Box, Button, Textarea, TextInput, Select, Checkbox, NumberInput, MultiSelect, Divider, Title} from "@mantine/core";
+import {
+    Box,
+    Button,
+    Textarea,
+    TextInput,
+    Select,
+    Checkbox,
+    NumberInput,
+    MultiSelect,
+    Divider,
+    Title
+} from "@mantine/core";
 
 type FieldValues = {
     title: string;
@@ -16,7 +27,7 @@ type FieldValues = {
     locationName: string;
     dateTime: string;
     paidEvent?: boolean;
-    entryPrice?: number;
+    entryPrice?: number | null;
     acceptedPayment?: any;
     firstName: string;
 }
@@ -30,7 +41,7 @@ const CreateGame: React.FC = () => {
             state: '',
             dateTime: '',
             paidEvent: false,
-            entryPrice: undefined,
+            entryPrice: null,
             acceptedPayment: [],
             locationName: '',
             address: '',
@@ -53,12 +64,13 @@ const CreateGame: React.FC = () => {
         },
     });
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         try {
-            // const response = await createGame(values)
-            // console.log(response)
+            await createGame(values)
+            toast('Game Created!')
         } catch (error) {
             console.error(error.message)
+            toast('Error Creating Game')
         }
     }
 
@@ -72,10 +84,9 @@ const CreateGame: React.FC = () => {
     return (
         <Box className={'page CreateGame'}>
             <Box mb={40} ta={"center"}>Create a Game or Event</Box>
-
             <Box style={{boxShadow: '0 0 10px rgba(0,0,0,.18', padding: '36px 24px'}}>
                 <Title mb={20} size={18}>Operation</Title>
-                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                <form onSubmit={form.onSubmit(onSubmit)}>
                     <TextInput mb={20} label="Title" placeholder="Title" {...form.getInputProps('title')}/>
                     <Textarea mb={20} label="Description"
                               placeholder="Description" {...form.getInputProps('description')}/>
@@ -88,7 +99,8 @@ const CreateGame: React.FC = () => {
 
                     {form.values.paidEvent &&
                         <>
-                            <NumberInput ml={16} mb={20} placeholder="Entry Price" prefix="$" {...form.getInputProps('entryPrice')}/>
+                            <NumberInput ml={16} mb={20} placeholder="Entry Price"
+                                         prefix="$" {...form.getInputProps('entryPrice')}/>
                             <MultiSelect ml={16} mb={20} placeholder="Select accepted payments"
                                          data={["venmo", "paypal", "Cash"]} {...form.getInputProps('acceptedPayment')}/>
                         </>
@@ -109,11 +121,14 @@ const CreateGame: React.FC = () => {
                     />
                     <Divider mb={20}/>
                     <Title mb={20} size={18}>Contact</Title>
-                    <TextInput mb={20} label="First Name" placeholder="First name" {...form.getInputProps('firstName')}/>
+                    <TextInput mb={20} label="First Name"
+                               placeholder="First name" {...form.getInputProps('firstName')}/>
 
-                    <TextInput mb={20} label="Contact Email" placeholder="Contact Email" {...form.getInputProps('email')}/>
+                    <TextInput mb={20} label="Contact Email"
+                               placeholder="Contact Email" {...form.getInputProps('email')}/>
 
-                    <TextInput mb={20} label="Phone (Optional)" placeholder="Phone Number" type={"number"}{...form.getInputProps('phoneNumber')}/>
+                    <TextInput mb={20} label="Phone (Optional)" placeholder="Phone Number"
+                               type={"number"}{...form.getInputProps('phoneNumber')}/>
                     <Button fullWidth mt={4} type='submit'>
                         Submit
                     </Button>
