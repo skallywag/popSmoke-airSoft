@@ -1,11 +1,12 @@
-$primaryRed: #740d30;
-$primaryBlue: #131b30;
+$darkGreen: #3C3633;
+$lightGreen:#436850;
+$primaryOrange: #FF5B22;
 $white: #ffffff;
 $accentError: #FF0000;
 
 :export {
-  primaryRed: $primaryRed;
-  primaryBlue: $primaryBlue;
-  white: $white;
+  darkGreen: $darkGreen;
+  lightGreen: $lightGreen;
+  primaryOrange: $primaryOrange;
   accentError: $accentError;
 }

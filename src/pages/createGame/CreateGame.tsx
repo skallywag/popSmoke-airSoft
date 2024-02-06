@@ -5,6 +5,7 @@ import {createGame} from "../../api/game";
 import {useForm} from '@mantine/form';
 import '@mantine/dates/styles.css';
 import {DateTimePicker} from '@mantine/dates';
+import themeVars from '../../styles/themeVars.module.scss';
 import {
     Box,
     Button,
@@ -15,7 +16,8 @@ import {
     NumberInput,
     MultiSelect,
     Divider,
-    Title
+    Title,
+    Text
 } from "@mantine/core";
 
 type FieldValues = {
@@ -76,16 +78,16 @@ const CreateGame: React.FC = () => {
 
     const handleResetEventValues = () => {
         if (form.values.paidEvent) {
-            form.setFieldValue('entryPrice', undefined);
+            form.setFieldValue('entryPrice', null);
             form.setFieldValue('acceptedPayment', [])
         }
     }
 
     return (
         <Box className={'page CreateGame'}>
-            <Box mb={40} ta={"center"}>Create a Game or Event</Box>
+            <Text mb={20} size={'xl'} fw={900}>Create New Game</Text>
             <Box style={{boxShadow: '0 0 10px rgba(0,0,0,.18', padding: '36px 24px'}}>
-                <Title mb={20} size={18}>Operation</Title>
+                <Title mb={20} size={18} style={{color: themeVars.primaryOrange}}>Operation</Title>
                 <form onSubmit={form.onSubmit(onSubmit)}>
                     <TextInput mb={20} label="Title" placeholder="Title" {...form.getInputProps('title')}/>
                     <Textarea mb={20} label="Description"
@@ -120,7 +122,7 @@ const CreateGame: React.FC = () => {
                         {...form.getInputProps('dateTime')}
                     />
                     <Divider mb={20}/>
-                    <Title mb={20} size={18}>Contact</Title>
+                    <Title mb={20} size={18} style={{color: themeVars.primaryOrange}}>Contact</Title>
                     <TextInput mb={20} label="First Name"
                                placeholder="First name" {...form.getInputProps('firstName')}/>
 
@@ -129,7 +131,8 @@ const CreateGame: React.FC = () => {
 
                     <TextInput mb={20} label="Phone (Optional)" placeholder="Phone Number"
                                type={"number"}{...form.getInputProps('phoneNumber')}/>
-                    <Button fullWidth mt={4} type='submit'>
+
+                    <Button color={themeVars.primaryOrange} fullWidth mt={4} type='submit'>
                         Submit
                     </Button>
                 </form>
