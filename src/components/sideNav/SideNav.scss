@@ -1,0 +1,27 @@
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  padding: 50px 10px 0px;
+
+  .mantine-NavLink-root {
+    border-radius: 4px;
+    &[data-active] {
+      background-color: green;
+      color: white;
+    }
+    &:hover {
+      background-color: green;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+

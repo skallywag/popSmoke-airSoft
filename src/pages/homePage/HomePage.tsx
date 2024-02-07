@@ -5,8 +5,8 @@ interface HomePageProps {
 }
 const HomePage: React.FC<HomePageProps> = (props) => {
     return (
-        <Box className={'HomePage.scss'}>
-        I am Home
+        <Box className={'page homePage'}>
+       Games and Events
         </Box>
     )
 }

@@ -1,6 +1,8 @@
 #root,
 .App {
   height: 100%;
+  display: flex;
+  width: 100%;
 }
 
 * {
@@ -15,11 +17,10 @@
   background-color: orange;
 }
 
-  .page {
-    height: 100%;
-    min-height: calc(100vh);
-    position: relative;
-    overflow-y: visible;
-    padding: 12px 24px;
-  }
+.page {
+  padding: 12px 24px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
 
