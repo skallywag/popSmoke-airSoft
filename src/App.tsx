@@ -3,14 +3,16 @@ import '@mantine/core/styles.css';
 import {BrowserRouter as Router} from "react-router-dom";
 import {RouterProvider} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import NavBar from "./components/sideNav/SideNav";
+import SideNav from "./components/sideNav/SideNav";
+import NavBar from "./components/navBar/NavBar"
 import {router} from "./router";
 
 function App() {
     return (
         <div className="App">
+            <NavBar/>
             <Router>
-                <NavBar/>
+                <SideNav/>
             </Router>
             <RouterProvider router={router}/>
         </div>

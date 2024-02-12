@@ -1,0 +1,61 @@
+.header {
+    height: 56px;
+    margin-bottom: 120px;
+    background-color: #333;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .inner {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .link {
+    display: block;
+    line-height: 1;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+    font-weight: 500;
+
+    @mixin hover {
+      background-color: black;
+    }
+
+    [data-mantine-color-scheme] &[data-active] {
+      background-color: blue;
+      color: white;
+    }
+  }
+ .mantine-Drawer-title {
+   font-size: 20px;
+   font-weight: 800;
+ }
+
+ .mantine-Drawer-content {
+   background-color: #333;
+ }
+
+ .mantine-Drawer-header {
+   margin-bottom: 20px;
+   background-color: #333;
+ }
+
+  @media (min-width: 600px) {
+    .header {
+      display: none;
+    }
+  }
+
+
+
+
+
+
+

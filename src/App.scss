@@ -22,5 +22,9 @@
   width: 100%;
   overflow: auto;
   position: relative;
+
+  @media (max-width: 600px) {
+    margin-top: 56px;
+  }
 }
 

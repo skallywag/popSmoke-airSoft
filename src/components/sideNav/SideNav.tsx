@@ -13,7 +13,7 @@ import {router} from '../../router';
 import {useLocation} from 'react-router-dom'
 import './SideNav.scss';
 
-const Sidebar: React.FC = () => {
+const SideNav: React.FC = () => {
    const location = useLocation()
     const [currentPath, setCurrentPath] = useState(location.pathname);
 
@@ -48,4 +48,4 @@ const Sidebar: React.FC = () => {
     );
 };
 
-export default Sidebar;
+export default SideNav;
